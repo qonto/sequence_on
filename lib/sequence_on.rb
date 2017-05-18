@@ -29,7 +29,7 @@ module SequencedOn
       self.sequential_id = if last_record
                              last_record.sequential_id + 1
                            else
-                             opts[:starts_at] || 1
+                             @@seq_on_opts[:starts_at] || 1
                            end
     end
   end
