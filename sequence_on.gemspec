@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date = '2017-05-18'
   s.summary = 'Flexible acts_as_sequenced replacement'
   s.description = 'Flexible acts_as_sequenced replacement'
-  s.authors = ['Jérémy SEBAN']
+  s.authors = ['Jeremy SEBAN']
   s.email = 'tech@qonto.eu'
   s.files = Dir['lib/**/*']
   s.license = 'MIT'
