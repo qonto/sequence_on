@@ -3,8 +3,9 @@ module SequencedOn
 
   class_methods do
 
-    def sequence_on(l)
+    def sequence_on(l, opts={})
       @@seq_on = l
+      @@seq_on_opts = opts
     end
   end
 
@@ -28,7 +29,7 @@ module SequencedOn
       self.sequential_id = if last_record
                              last_record.sequential_id + 1
                            else
-                             1
+                             opts[:starts_at] || 1
                            end
     end
   end
