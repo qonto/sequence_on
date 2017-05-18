@@ -38,7 +38,7 @@ module SequenceOn
       def sequenced_on(lmd, options = {})
         include InstanceMethods
         mattr_accessor :sequence_options, instance_accessor: false
-        before_create :generate_sequence_id, prepend: true
+        before_save :generate_sequence_id
         self.sequence_options = DEFAULT_OPTIONS.merge(options).merge(lmd: lmd)
       end
     end
