@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary = 'Flexible acts_as_sequenced replacement'
   s.description = 'Flexible acts_as_sequenced replacement'
   s.authors = ['Jérémy SEBAN']
-  s.email = 'dev@qonto.eu'
+  s.email = 'tech@qonto.eu'
   s.files = Dir['lib/**/*']
   s.license = 'MIT'
   s.homepage = 'https://github.com/qonto/sequence_on'
