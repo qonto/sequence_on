@@ -23,7 +23,7 @@ module SequenceOn
         return if self.sequential_id
         options = self.class.sequence_options
         self.class.connection.execute("LOCK TABLE #{self.class.table_name} IN EXCLUSIVE MODE") if postgresql?
-        last_record = if record.persisted?
+        last_record = if self.persisted?
                         self.class.class_exec(self, &options[:lmd]).
                           order("#{options[:column]} DESC").
                           where("NOT id = ?", self.id).
