@@ -20,11 +20,20 @@ module SequenceOn
       end
 
       def generate_sequence_id
+        return if self.sequential_id
         options = self.class.sequence_options
         self.class.connection.execute("LOCK TABLE #{self.class.table_name} IN EXCLUSIVE MODE") if postgresql?
-        last_record = self.class.class_exec(self, &options[:lmd]).
-          order("#{options[:column]} DESC").
-          first
+        last_record = if record.persisted?
+                        self.class.class_exec(self, &options[:lmd]).
+                          order("#{options[:column]} DESC").
+                          where("NOT id = ?", self.id).
+                          first
+                      else
+                        self.class.class_exec(self, &options[:lmd]).
+                          order("#{options[:column]} DESC").
+                          first
+                      end
+
         self.sequential_id = if last_record
                                last_record.send(options[:column]) + 1
                              else
