@@ -35,7 +35,7 @@ module SequenceOn
                       end
 
         self.sequential_id = if last_record
-                               last_record.send(options[:column]) + 1
+                               (last_record.send(options[:column]) || 0) + 1
                              else
                                options[:start_at]
                              end

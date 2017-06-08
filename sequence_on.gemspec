@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'sequence_on'
-  s.version = '0.0.7'
-  s.date = '2017-05-19'
+  s.version = '0.0.8'
+  s.date = '2017-06-08'
   s.summary = 'Flexible acts_as_sequenced replacement'
   s.description = 'Flexible acts_as_sequenced replacement'
   s.authors = ['Jeremy SEBAN']
