@@ -22,21 +22,22 @@ module SequenceOn
       def generate_sequence_id
         return if self.sequential_id
         options = self.class.sequence_options
-        lock_candidates = self.class.class_exec(self, &options[:lock])
+        scope = self.class.class_exec(self, &options[:lmd])
+        lock_candidates = scope.values
         lock_key = Digest::MD5.hexdigest(lock_candidates.join).unpack('Q').join
 
         self.class.connection.execute("SELECT pg_advisory_xact_lock(#{lock_key})", "sequenced_on") if postgresql?
         last_record = if self.persisted?
                         self.class
                           .unscoped
-                          .class_exec(self, &options[:lmd]).
+                          .where(scope).
                           order("#{options[:column]} DESC").
                           where("NOT id = ?", self.id).
                           first
                       else
                         self.class
                           .unscoped
-                          .class_exec(self, &options[:lmd]).
+                          .where(scope).
                           order("#{options[:column]} DESC").
                           first
                       end
