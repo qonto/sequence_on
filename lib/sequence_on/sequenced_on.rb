@@ -24,9 +24,9 @@ module SequenceOn
         options = self.class.sequence_options
         scope = self.class.class_exec(self, &options[:lmd])
         lock_candidates = scope.values
-        lock_key = Digest::MD5.hexdigest(lock_candidates.join).unpack('Q').join
+        lock_key = Digest::MD5.hexdigest(lock_candidates.join).unpack('L').join
 
-        self.class.connection.execute("SELECT pg_advisory_xact_lock(#{lock_key})", "sequenced_on") if postgresql?
+        self.class.connection.execute("SELECT pg_advisory_xact_lock('#{self.class.table_name}'::regclass::integer, #{lock_key})", "sequence_on") if postgresql?
         last_record = if self.persisted?
                         self.class
                           .unscoped
