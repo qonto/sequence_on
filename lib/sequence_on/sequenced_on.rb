@@ -27,23 +27,21 @@ module SequenceOn
         lock_key = Digest::MD5.hexdigest(lock_candidates.join).unpack('L').join
 
         self.class.connection.execute("SELECT pg_advisory_xact_lock('#{self.class.table_name}'::regclass::integer, #{lock_key})", "sequence_on") if postgresql?
-        last_record = if self.persisted?
+        last_sequential_id = if self.persisted?
                         self.class
                           .unscoped
-                          .where(scope).
-                          order("#{options[:column]} DESC").
-                          where("NOT id = ?", self.id).
-                          first
+                          .where(scope)
+                          .maximum(options[:column])
+                          .where("NOT id = ?", self.id)
                       else
                         self.class
                           .unscoped
-                          .where(scope).
-                          order("#{options[:column]} DESC").
-                          first
+                          .where(scope)
+                          .maximum(options[:column])
                       end
 
-        self.sequential_id = if last_record
-                               (last_record.send(options[:column]) || 0) + 1
+        self.sequential_id = if last_sequential_id
+                               (last_sequential_id || 0) + 1
                              else
                                options[:start_at]
                              end
