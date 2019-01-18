@@ -31,8 +31,8 @@ module SequenceOn
                         self.class
                           .unscoped
                           .where(scope)
-                          .maximum(options[:column])
                           .where("NOT id = ?", self.id)
+                          .maximum(options[:column])
                       else
                         self.class
                           .unscoped
