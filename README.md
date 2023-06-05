@@ -20,3 +20,9 @@ instead of:
 ```ruby
 sequenced_on ->(r) { where(bank_account_id: r.bank_account_id) }
 ```
+
+# Releasing
+
+To publish a new version to rubygems, switch to a new branch named after the version you want to publish,
+for instance `v0.3.0`, update `lib/sequence_on/version.rb` to this version, and open a new merge request.
+Once merged, a new release will be created.
