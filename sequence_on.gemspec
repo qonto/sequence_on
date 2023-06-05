@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'sequence_on'
-  s.version = '0.2.0'
+  s.version = SequenceOn::VERSION
   s.date = '2021-04-05'
   s.summary = 'Flexible acts_as_sequenced replacement'
   s.description = 'Flexible acts_as_sequenced replacement'

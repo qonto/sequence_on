@@ -1,6 +1,6 @@
-# sequence_on
+![Gem Version](https://badge.fury.io/rb/sequence_on.svg)
 
-[![Build Status](https://travis-ci.org/qonto/sequence_on.svg?branch=master)](https://travis-ci.org/qonto/sequence_on)
+# sequence_on
 
 It is a replacement for act_as_sequence, where you can specify a lambda to determine how to generate the scope.
 
@@ -14,7 +14,7 @@ This version removes global lock on a table and uses `pg_advisory_lock`.
 Now `sequenced_on` lambda accepts only hash of parameters and not ActiveRecord objects:
 ```ruby
 sequenced_on ->(r) { { bank_account_id: r.bank_account_id } }
-``` 
+```
 
 instead of:
 ```ruby
