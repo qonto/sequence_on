@@ -23,4 +23,4 @@ sequenced_on ->(r) { where(bank_account_id: r.bank_account_id) }
 
 # Releasing
 
-To publish a new version to rubygems, create a new tag on github.
+To publish a new version to rubygems, update the version in `lib/sequence_on/version.rb`, and merge.

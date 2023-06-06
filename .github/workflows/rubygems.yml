@@ -2,14 +2,16 @@ name: Ruby Gem
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
+    paths:
+      - lib/sequence_on/version.rb
 
 jobs:
   build:
     name: Build and publish
     runs-on: ubuntu-latest
-    environment: deployment
+    environment: master
     permissions:
       contents: read
       packages: write
